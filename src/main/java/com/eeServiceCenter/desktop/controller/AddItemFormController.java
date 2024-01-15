@@ -2,7 +2,6 @@ package com.eeServiceCenter.desktop.controller;
 
 import com.eeServiceCenter.desktop.Services.ItemService;
 import com.eeServiceCenter.desktop.model.ItemModel;
-import com.eeServiceCenter.desktop.util.LocatedImage;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -10,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 

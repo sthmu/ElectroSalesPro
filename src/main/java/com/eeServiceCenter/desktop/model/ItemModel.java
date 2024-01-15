@@ -1,6 +1,5 @@
 package com.eeServiceCenter.desktop.model;
 
-import com.eeServiceCenter.desktop.util.LocatedImage;
 import javafx.scene.image.Image;
 import lombok.*;
 

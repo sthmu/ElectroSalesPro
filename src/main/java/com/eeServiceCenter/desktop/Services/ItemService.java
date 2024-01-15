@@ -52,14 +52,15 @@ public class ItemService {
     public String getLastCode(){
         int lastCodeNum=0;
         for(ItemModel item:itemList){
-            int curCode=Integer.parseInt(item.getCode().substring(1,4));
+            int curCode=Integer.parseInt(item.getCode().substring(1,5));
             if(curCode>lastCodeNum){
                 lastCodeNum=curCode;
             }
+            System.out.println(curCode);
         }
         String LastCode=lastCodeNum+"";
 
-        for(int i=(LastCode).length();i<5;i++){
+        for(int i=(LastCode).length();i<4;i++){
             LastCode="0"+LastCode;
         }
 

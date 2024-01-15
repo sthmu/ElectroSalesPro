@@ -4,8 +4,10 @@ import com.eeServiceCenter.desktop.Entity.User;
 import com.eeServiceCenter.desktop.db.DBConnection;
 import javafx.scene.control.Alert;
 
-import javax.swing.plaf.nimbus.State;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UserPersistence {
 

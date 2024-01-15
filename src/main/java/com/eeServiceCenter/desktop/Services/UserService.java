@@ -3,13 +3,8 @@ package com.eeServiceCenter.desktop.Services;
 import com.eeServiceCenter.desktop.Entity.User;
 import com.eeServiceCenter.desktop.model.UserModel;
 import com.eeServiceCenter.desktop.persistence.UserPersistence;
-import com.mysql.cj.xdevapi.Warning;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
