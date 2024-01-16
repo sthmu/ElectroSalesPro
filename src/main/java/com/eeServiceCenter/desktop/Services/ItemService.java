@@ -4,10 +4,12 @@ import com.eeServiceCenter.desktop.Entity.Item;
 import com.eeServiceCenter.desktop.model.ItemModel;
 import com.eeServiceCenter.desktop.persistence.ItemPersistence;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class ItemService {
 
@@ -19,7 +21,7 @@ public class ItemService {
         List<Item> entityList = ItemPersistence.getAll();
         List<ItemModel> tempModelList = new LinkedList<>();
         for (Item item : entityList) {
-            System.out.println(item.getImgUrl()+"sadddddddddddddddddd");
+
             tempModelList.add(new ItemModel(
                     item.getCode(),
                     item.getDescription(),
@@ -37,13 +39,41 @@ public class ItemService {
         boolean isSaved = itemPersistent.save(new Item(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQty(), item.getCategory(), item.getImage().getUrl()));
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Item Successfully Saved!").show();
-            itemList.add(item);
+
+            updateItemList(item);
+
             return true;
         } else {
             new Alert(Alert.AlertType.INFORMATION, "Item Failed to be Saved!").show();
             return false;
         }
     }
+
+    private void updateItemList(ItemModel item) {
+        ItemModel itemFromList= isInList(item);
+       if(itemFromList==null){
+           itemList.add(item);
+       }
+       else{
+           itemFromList.setDescription(item.getDescription());
+           itemFromList.setUnitPrice(item.getUnitPrice());
+           itemFromList.setQty(item.getQty());
+           itemFromList.setImage(item.getImage());
+           itemFromList.setCategory(item.getCategory());
+        }
+
+    }
+
+    private ItemModel isInList(ItemModel item) {
+
+        for(ItemModel itemInList:itemList){
+            if(item.getCode().equalsIgnoreCase(itemInList.getCode())){
+                return itemInList;
+            }
+        }
+        return null;
+    }
+
 
     public static List<ItemModel> getItemList() {
         return itemList;
@@ -58,7 +88,7 @@ public class ItemService {
             }
             System.out.println(curCode);
         }
-        String LastCode=lastCodeNum+"";
+        String LastCode=(++lastCodeNum)+"";
 
         for(int i=(LastCode).length();i<4;i++){
             LastCode="0"+LastCode;
@@ -74,5 +104,38 @@ public class ItemService {
             }
         }
         return null;
+    }
+
+    private void removeFromItemList(String code){
+        for(ItemModel itemInList:itemList){
+            if(code.equalsIgnoreCase(itemInList.getCode())){
+                itemList.remove(itemInList);
+            }
+        }
+
+    }
+
+
+    public boolean deleteItem(String text) {
+
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setContentText("Are You Sure To Delete this Item");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+           boolean isDeleted=itemPersistent.delete(text);
+            if(isDeleted){
+                removeFromItemList(text);
+                return true;
+            }
+            else {
+                return false;
+            }
+        } else {
+            alert.close();
+            return false;
+        }
     }
 }

@@ -5,8 +5,11 @@ import com.eeServiceCenter.desktop.model.ItemModel;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +21,7 @@ public class AddItemFormController implements Initializable {
     public JFXTextField txtUnitPrice;
     public JFXTextField txtDescription;
     public JFXTextField txtItemCode;
+    public AnchorPane pane;
 
     ItemService itemService=new ItemService();
     @Override
@@ -26,14 +30,21 @@ public class AddItemFormController implements Initializable {
 
     }
     public void addToInventoryBtnOnPress(ActionEvent actionEvent) {
-        itemService.saveItem(new ItemModel(
+        boolean isAdded= itemService.saveItem(new ItemModel(
                 txtItemCode.getText(),
                 txtDescription.getText(),
                 Double.parseDouble(txtUnitPrice.getText()),
                 0,
                 "electronic",
                 new Image(pictureUrlLbl.getText())
-                ));
+        ));
+
+        Stage thisStage= (Stage) pane.getScene().getWindow();
+
+        if(isAdded){
+            thisStage.close();
+
+        }
 
     }
 

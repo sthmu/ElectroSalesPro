@@ -11,15 +11,18 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,7 +44,8 @@ public class InventoryController implements Initializable {
     public JFXTextField priceTxt;
     public JFXTextField qtyTxt;
 
-    ItemService itemService=new ItemService();
+    ItemService itemService = new ItemService();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ItemCodeCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("code"));
@@ -91,6 +95,17 @@ public class InventoryController implements Initializable {
 
     public void updateButtonOnAction(ActionEvent actionEvent) {
 
+        boolean isAdded = itemService.saveItem(new ItemModel(
+                codeTxt.getText(),
+                descriptionTxt.getText(),
+                Double.parseDouble(priceTxt.getText()),
+                Integer.parseInt(qtyTxt.getText()),
+                "electronic",
+                imageBox.getImage()
+        ));
+
+        loadItemTable();
+
 
     }
 
@@ -99,14 +114,55 @@ public class InventoryController implements Initializable {
         addItemWindow.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AddItemForm.fxml"))));
         addItemWindow.show();
 
-        addItemWindow.setOnCloseRequest(windowEvent -> loadItemTable());
+
+        addItemWindow.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                loadItemTable();
+                System.out.println("ohh yeah");
+
+            }
+        });
+
+        addItemWindow.setOnHiding(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent we) {
+                System.out.println("Stage is closing");
+                loadItemTable();
+                System.out.println("ohh yeah");
+
+            }
+        });
+//
     }
+
+
 
     public void backButtonOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"))));
     }
 
+
+    public void deleteBtnOnAction(ActionEvent actionEvent) {
+        boolean isDeleted = itemService.deleteItem(codeTxt.getText());
+        if (isDeleted) {
+            clearFields();
+            loadItemTable();
+        }
+
+    }
+
+    private void clearFields() {
+        imageBox.setImage(null);
+        codeTxt.setText("");
+        descriptionTxt.clear();
+        qtyTxt.clear();
+        priceTxt.clear();
+    }
+
+
+    public void editBtnOnAction(ActionEvent actionEvent) {
+    }
 
 
 }
