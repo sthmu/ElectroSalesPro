@@ -42,4 +42,9 @@ public class dashboardController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    public void manageUserBtnOnPress(ActionEvent actionEvent) throws IOException {
+        Stage stage=(Stage) pane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/userManageForm.fxml"))));
+    }
 }

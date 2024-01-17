@@ -44,7 +44,7 @@ public class LoginFromController implements Initializable {
 
                 try {
                     //here it will rediect to the user beloging dashboard
-                    String view= ViewFactory.getInstance().getView(UserService.getLoggedInUser().getAccessLevel());
+                    String view= ViewFactory.getInstance().getView(UserService.getLoggedInUser().getAuthorityLvl());
                     if(view==null){
                         return;
                     }

@@ -1,15 +1,18 @@
 package com.eeServiceCenter.desktop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class UserModel {
-    private String userId;
+    private String Id;
     private String userName;
     private String Password;
-    private int accessLevel;
+    private String description;
+    private String createdAt;
+    private String status;
+    private int authorityLvl;
 }
