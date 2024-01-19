@@ -29,6 +29,17 @@ public class dashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(UserService.getLoggedInUser()!=null){
+            if(UserService.getLoggedInUser().getAuthorityLvl()==1){
+                Stage stage=(Stage) pane.getScene().getWindow();
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderForm.fxml"))));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
 
 
     }
@@ -47,4 +58,9 @@ public class dashboardController implements Initializable {
         Stage stage=(Stage) pane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/userManageForm.fxml"))));
     }
+
+    private void setButtonAccess(){
+
+    }
+
 }

@@ -59,10 +59,10 @@ public class UserManageController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"There has been an error while getting the userList from Database");
         }
 
-        userIdCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("code"));
-        usernameCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("description"));
-        createdDateCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("unitPrice"));
-        StatusCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
+        userIdCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("Id"));
+        usernameCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("userName"));
+        createdDateCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("createdAt"));
+        StatusCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("status"));
         loadUserTable();
 
 
