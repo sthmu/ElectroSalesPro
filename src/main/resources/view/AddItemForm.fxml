@@ -6,57 +6,76 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eeServiceCenter.desktop.controller.AddItemFormController">
-   <children>
-      <GridPane layoutX="10.0" layoutY="10.0" prefHeight="283.0" prefWidth="484.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.33329264322919" minWidth="129.33329264322919" prefWidth="129.33329264322919" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.3333740234375" minWidth="325.3333740234375" prefWidth="355.3333740234375" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="48.333343505859375" minHeight="10.0" prefHeight="48.333343505859375" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="39.99998982747396" minHeight="20.999989827473954" prefHeight="39.99998982747396" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.333343505859375" minHeight="36.0" prefHeight="39.333343505859375" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="38.666656494140625" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="130.33333333333334" minHeight="10.0" prefHeight="116.66666666666663" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label prefHeight="17.0" prefWidth="87.0" text="Description" GridPane.rowIndex="2" />
-            <Label prefHeight="17.0" prefWidth="58.0" text="Item Code" GridPane.rowIndex="1" />
-            <JFXTextField fx:id="txtItemCode" maxWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <JFXTextField fx:id="txtDescription" maxWidth="-Infinity" prefHeight="25.0" prefWidth="262.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefHeight="17.0" prefWidth="87.0" text="Unit Price" GridPane.rowIndex="3" />
-            <JFXTextField fx:id="txtUnitPrice" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Add Item" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
-            <Label text="Add Picture" GridPane.rowIndex="4" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-            </Label>
-            <JFXTextField fx:id="pictureUrlLbl" maxWidth="-Infinity" prefHeight="34.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <JFXButton onAction="#addUrlBtnOnPress" style="-fx-border-color: blue;" text="Add URL" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets right="20.0" top="10.0" />
-               </GridPane.margin>
-            </JFXButton>
-            <ImageView fx:id="imageItmView" fitHeight="78.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
-               <GridPane.margin>
-                  <Insets bottom="10.0" left="10.0" />
-               </GridPane.margin>
-            </ImageView>
-            <JFXButton onAction="#addToInventoryBtnOnPress" style="-fx-background-color: grey; -fx-border-radius: 20;" text="ADD to Inventory" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="15.0" right="50.0" />
-               </GridPane.margin>
-            </JFXButton>
-         </children>
-      </GridPane>
-   </children>
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="298.0" prefWidth="509.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.eeServiceCenter.desktop.controller.AddItemFormController">
+    <children>
+        <GridPane layoutX="10.0" layoutY="10.0" prefHeight="283.0" prefWidth="484.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.33329264322919" minWidth="129.33329264322919"
+                                   prefWidth="129.33329264322919"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.3333740234375" minWidth="325.3333740234375"
+                                   prefWidth="355.3333740234375"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="48.333343505859375" minHeight="10.0" prefHeight="48.333343505859375"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="39.99998982747396" minHeight="20.999989827473954"
+                                prefHeight="39.99998982747396" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="47.333343505859375" minHeight="36.0" prefHeight="39.333343505859375"
+                                vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="38.666656494140625" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="130.33333333333334" minHeight="10.0" prefHeight="116.66666666666663"
+                                vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label prefHeight="17.0" prefWidth="87.0" text="Description" GridPane.rowIndex="2"/>
+                <Label prefHeight="17.0" prefWidth="58.0" text="Item Code" GridPane.rowIndex="1"/>
+                <JFXTextField fx:id="txtItemCode" maxWidth="-Infinity" prefWidth="100.0" GridPane.columnIndex="1"
+                              GridPane.rowIndex="1"/>
+                <JFXTextField fx:id="txtDescription" maxWidth="-Infinity" prefHeight="25.0" prefWidth="262.0"
+                              GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label prefHeight="17.0" prefWidth="87.0" text="Unit Price" GridPane.rowIndex="3"/>
+                <JFXTextField fx:id="txtUnitPrice" maxWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1"
+                              GridPane.rowIndex="3"/>
+                <Label text="Add Item" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="26.0"/>
+                    </font>
+                </Label>
+                <Label text="Add Picture" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets top="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <JFXTextField fx:id="pictureUrlLbl" maxWidth="-Infinity" prefHeight="34.0" prefWidth="250.0"
+                              GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP"/>
+                <JFXButton onAction="#addUrlBtnOnPress" style="-fx-border-color: blue;" text="Add URL"
+                           GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4"
+                           GridPane.valignment="TOP">
+                    <GridPane.margin>
+                        <Insets right="20.0" top="10.0"/>
+                    </GridPane.margin>
+                </JFXButton>
+                <ImageView fx:id="imageItmView" fitHeight="78.0" fitWidth="82.0" pickOnBounds="true"
+                           preserveRatio="true" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="4"
+                           GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0"/>
+                    </GridPane.margin>
+                </ImageView>
+                <JFXButton onAction="#addToInventoryBtnOnPress"
+                           style="-fx-background-color: grey; -fx-border-radius: 20;" text="ADD to Inventory"
+                           textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4"
+                           GridPane.valignment="BOTTOM">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets bottom="15.0" right="50.0"/>
+                    </GridPane.margin>
+                </JFXButton>
+            </children>
+        </GridPane>
+    </children>
 </AnchorPane>
