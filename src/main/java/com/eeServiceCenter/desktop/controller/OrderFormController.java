@@ -87,22 +87,3 @@ public class OrderFormController implements Initializable {
 
 }
 
-class ItemBox extends VBox {
-    public ItemBox(ItemModel item) {
-        // Create ImageView for the item image
-        ImageView imageView = new ImageView(item.getImage());
-        imageView.setFitWidth(100); // Adjust the width as needed
-        imageView.setFitHeight(100); // Adjust the height as needed
-
-        // Create Text for the item description
-        Text codeText=new Text(item.getCode());
-        Text descriptionText = new Text(item.getDescription());
-
-        // Add components to the VBox
-        getChildren().addAll(imageView, descriptionText);
-
-        // Set spacing and styles if needed
-        setSpacing(10);
-        setStyle("-fx-border-color: black; -fx-border-width: 1px;");
-    }
-}
