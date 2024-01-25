@@ -51,6 +51,10 @@ public class UserService {
         return loggedInUser;
     }
 
+    public static void logout() {
+        loggedInUser=null;
+    }
+
     public boolean login(String username, String password) throws NoSuchAlgorithmException {
         String encryptedPassword = toHexString(getSHA(password));
 

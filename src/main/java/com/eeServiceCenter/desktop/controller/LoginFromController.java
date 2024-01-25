@@ -8,7 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,9 +22,10 @@ import java.util.ResourceBundle;
 
 public class LoginFromController implements Initializable {
 
-    public JFXTextField usernameTxtField;
-    public JFXPasswordField passwordTxtField;
-    public AnchorPane pane;
+
+    public TextField usernameTxtField;
+    public PasswordField passwordTxtField;
+    public BorderPane pane;
     private UserService userService=new UserService();
 
     @Override

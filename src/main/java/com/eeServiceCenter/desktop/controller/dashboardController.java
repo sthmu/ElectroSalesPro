@@ -8,12 +8,9 @@ import com.jfoenix.controls.JFXPopup;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,14 +23,18 @@ public class dashboardController implements Initializable {
     public JFXButton orderBtn;
     public JFXButton inventoryBtn;
     public JFXButton userBtn;
-    JFXPopup userPopup;
-
-
     public BorderPane pane;
+    JFXPopup userPopup;
+    User user;
+    private JFXButton logBtn;
 
-    User user= new UserService().getLoggedInUser();
-    public void placeOrderBtnOnPress(ActionEvent actionEvent)  {
-        Stage stage=(Stage) pane.getScene().getWindow();
+    {
+        new UserService();
+        user = UserService.getLoggedInUser();
+    }
+
+    public void placeOrderBtnOnPress(ActionEvent actionEvent) {
+        Stage stage = (Stage) pane.getScene().getWindow();
 
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OrderForm.fxml"))));
@@ -63,7 +64,7 @@ public class dashboardController implements Initializable {
     }
 
     public void inventoryBtnOnPress(ActionEvent actionEvent) {
-        Stage stage=(Stage) pane.getScene().getWindow();
+        Stage stage = (Stage) pane.getScene().getWindow();
 
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/inventory.fxml"))));
@@ -73,47 +74,49 @@ public class dashboardController implements Initializable {
     }
 
     public void manageUserBtnOnPress(ActionEvent actionEvent) throws IOException {
-        Stage stage=(Stage) pane.getScene().getWindow();
+        Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/userManageForm.fxml"))));
     }
 
-    private void setButtonAccess(){
+    private void setButtonAccess() {
 
     }
 
     private void gotoLogin() throws IOException {
-        Stage stage=(Stage) pane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/login.fxml"))));
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/loginForm.fxml"))));
+
     }
 
-    private void initUserPopup(){
+    private void initUserPopup() {
         JFXListView<JFXButton> list = new JFXListView<>();
-
-
-
-        userPopup=new JFXPopup(list);
-
-        VBox popupInside=new VBox();
-        JFXButton loginBtn=new JFXButton("Login");
-        list.getItems().add(loginBtn);
-        JFXButton logoutBtn=new JFXButton("Logout");
-        logoutBtn.setDisable(true);
-        list.getItems().add(logoutBtn);
-
-        loginBtn.setOnAction(e -> {
-            try {
-                gotoLogin();
-            } catch (IOException ae) {
-                throw new RuntimeException(ae);
-            }
-        });
-
+        userPopup = new JFXPopup(list);
+        logBtn = new JFXButton("Login");
+        list.getItems().add(logBtn);
 
 
     }
+
     public void userBtnOnPress(ActionEvent actionEvent) {
 
-        userPopup.show(userBtn,JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);
+        if (UserService.getLoggedInUser() == null) {
+            logBtn.setText("login");
+            logBtn.setOnAction(e -> {
+                try {
+                    gotoLogin();
+                } catch (IOException ae) {
+                    throw new RuntimeException(ae);
+                }
+            });
+        } else {
+            logBtn.setText("Logout");
+            logBtn.setOnAction(e -> {
+                UserService.logout();
+                userPopup.hide();
+                new Alert(Alert.AlertType.CONFIRMATION,"Logged Out Successfully").show();
+            });
+        }
+        userPopup.show(userBtn, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);
     }
 
 
