@@ -89,7 +89,6 @@ public class UserManageController implements Initializable {
             statusComboBox.getSelectionModel().select((selectedUser.getStatus().equalsIgnoreCase("Active")?0:1));
             authorityLvlComboBox.getSelectionModel().select(selectedUser.getAuthorityLvl()-1);
         }
-
     }
 
     private void loadUserTable() {
@@ -111,6 +110,7 @@ public class UserManageController implements Initializable {
 
 
     public void addUserBtnOnPress(ActionEvent actionEvent) {
+
     }
 
     public void updateButtonOnAction(ActionEvent actionEvent) {

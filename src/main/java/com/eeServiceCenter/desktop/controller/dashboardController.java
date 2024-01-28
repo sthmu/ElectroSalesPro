@@ -85,6 +85,7 @@ public class dashboardController implements Initializable {
     private void gotoLogin() throws IOException {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/loginForm.fxml"))));
+        userPopup.hide();
 
     }
 
@@ -98,7 +99,6 @@ public class dashboardController implements Initializable {
     }
 
     public void userBtnOnPress(ActionEvent actionEvent) {
-
         if (UserService.getLoggedInUser() == null) {
             logBtn.setText("login");
             logBtn.setOnAction(e -> {
