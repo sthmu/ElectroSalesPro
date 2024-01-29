@@ -53,7 +53,6 @@ public class LoginFromController implements Initializable {
                     if(view==null){
                         return;
                     }
-
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(view))));
                     stage.setResizable(true);
                 } catch (IOException e) {
@@ -61,8 +60,6 @@ public class LoginFromController implements Initializable {
                 }
             }
         }
-
-
     }
 
 

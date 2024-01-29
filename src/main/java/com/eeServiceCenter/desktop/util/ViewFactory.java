@@ -13,6 +13,9 @@ public class ViewFactory {
 
             case 1:return "/view/retail.fxml";
             case 3:return "/view/accounting.fxml";
+            case 4: return "/view/inventory.fxml";
+            case 8:return "/view/dashboard.fxml";
+            case 9:return "/view/dashboard.fxml";
             case 10:return "/view/dashboard.fxml";
             default:return null;
 

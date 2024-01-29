@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -11,8 +9,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eeServiceCenter.desktop.controller.AddUserFormController">
@@ -23,8 +19,7 @@
               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="188.99997965494788" />
           </columnConstraints>
           <rowConstraints>
-              <RowConstraints maxHeight="174.00000508626303" minHeight="10.0" prefHeight="174.00000508626303" vgrow="SOMETIMES" />
-              <RowConstraints maxHeight="99.66665649414062" minHeight="32.00001017252603" prefHeight="32.00001017252603" vgrow="SOMETIMES" />
+              <RowConstraints maxHeight="174.00000508626303" minHeight="10.0" prefHeight="115.66665649414062" vgrow="SOMETIMES" />
               <RowConstraints maxHeight="107.66667938232422" minHeight="38.00001017252603" prefHeight="38.00001017252603" vgrow="SOMETIMES" />
               <RowConstraints maxHeight="107.66667938232422" minHeight="30.66668701171875" prefHeight="50.0" vgrow="SOMETIMES" />
               <RowConstraints maxHeight="137.000005086263" minHeight="27.99998982747394" prefHeight="42.0" vgrow="SOMETIMES" />
@@ -33,27 +28,17 @@
               <RowConstraints maxHeight="85.3333740234375" minHeight="10.0" prefHeight="85.3333740234375" vgrow="SOMETIMES" />
           </rowConstraints>
           <children>
-              <Label prefHeight="19.0" prefWidth="51.0" text="Id" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+              <Label prefHeight="19.0" prefWidth="82.0" text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                   <font>
                       <Font name="Ubuntu Regular" size="16.0" />
                   </font>
               </Label>
-              <Label prefHeight="19.0" prefWidth="82.0" text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+              <Label prefHeight="19.0" prefWidth="78.0" text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                   <font>
                       <Font name="Ubuntu Regular" size="16.0" />
                   </font>
               </Label>
-              <Label prefHeight="19.0" prefWidth="78.0" text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                  <font>
-                      <Font name="Ubuntu Regular" size="16.0" />
-                  </font>
-              </Label>
-              <Label prefHeight="19.0" prefWidth="53.0" text="Status" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                  <font>
-                      <Font name="Ubuntu Regular" size="15.0" />
-                  </font>
-              </Label>
-              <JFXButton onAction="#addUserBtnOnPress" prefHeight="41.0" prefWidth="105.0" style="-fx-background-color: #5cc05d; -fx-border-color: green; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Add User" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+              <JFXButton onAction="#addUserBtnOnPress" prefHeight="41.0" prefWidth="105.0" style="-fx-background-color: #5cc05d; -fx-border-color: green; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10;" text="Next" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                   <font>
                       <Font name="System Bold" size="15.0" />
                   </font>
@@ -64,44 +49,12 @@
                       <Insets right="40.0" />
                   </GridPane.margin>
               </JFXButton>
-              <Label fx:id="idLbl" text="..." GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <font>
-                      <Font size="15.0" />
-                  </font>
-              </Label>
-              <JFXTextField fx:id="usernameTxt" focusColor="BLACK" prefHeight="25.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <JFXTextField fx:id="usernameTxt" focusColor="BLACK" prefHeight="25.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="20.0" />
                </GridPane.margin></JFXTextField>
-              <JFXTextField fx:id="passwordTxt" maxWidth="-Infinity" prefHeight="25.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-              <JFXComboBox fx:id="statusComboBox" prefHeight="25.0" prefWidth="107.0" promptText="Status" stylesheets="@../style/style.css" unFocusColor="#41d750" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                  <focusColor>
-                      <LinearGradient endX="1.0" endY="1.0">
-                          <stops>
-                              <Stop color="#18dd4d" />
-                              <Stop color="WHITE" offset="1.0" />
-                          </stops>
-                      </LinearGradient>
-                  </focusColor></JFXComboBox>
-              <JFXComboBox fx:id="authorityLvlComboBox" prefHeight="25.0" prefWidth="109.0" promptText="AuthorityLvl" stylesheets="@../style/style.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-              <Label prefHeight="21.0" prefWidth="91.0" text="AuthorityLVL" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-                  <font>
-                      <Font size="15.0" />
-                  </font>
-              </Label>
-              <Label prefHeight="21.0" prefWidth="86.0" text="Description" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP">
-                  <font>
-                      <Font size="15.0" />
-                  </font>
-                  <GridPane.margin>
-                      <Insets top="10.0" />
-                  </GridPane.margin>
-              </Label>
-              <JFXTextArea fx:id="descriptionTxt" prefHeight="68.0" prefWidth="313.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin></JFXTextArea>
-            <Label text="ADD User" textFill="#141414">
+              <JFXTextField fx:id="passwordTxt" maxWidth="-Infinity" prefHeight="25.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label prefHeight="37.0" prefWidth="306.0" text="Register " textFill="#141414">
                <font>
                   <Font name="Corbel" size="32.0" />
                </font>
@@ -109,6 +62,16 @@
                   <Insets left="20.0" />
                </padding>
             </Label>
+            <Label prefHeight="19.0" prefWidth="78.0" text="Key" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Ubuntu Regular" size="16.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="keyTxt" focusColor="BLACK" prefHeight="25.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </JFXTextField>
           </children>
       </GridPane>
    </center>

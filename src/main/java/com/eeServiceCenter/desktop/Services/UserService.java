@@ -3,12 +3,8 @@ package com.eeServiceCenter.desktop.Services;
 import com.eeServiceCenter.desktop.Entity.User;
 import com.eeServiceCenter.desktop.model.UserModel;
 import com.eeServiceCenter.desktop.persistence.UserPersistence;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -20,8 +16,26 @@ import java.util.List;
 public class UserService {
 
     private UserPersistence userPersistence = new UserPersistence();
-    private List<UserModel> userList;
+    private static List<UserModel> userList = getuserList();
+
+
     private static User loggedInUser;
+
+
+    private static List<UserModel> getuserList() {
+        List<User> userEntityList = new UserPersistence().getAllUsers();
+
+        List<UserModel> userModelList = new LinkedList<>();
+
+        for (User userEntity : userEntityList) {
+            System.out.println(userEntity.toString() + "this is the user entity");
+            userModelList.add(new UserModel(userEntity.getId(), userEntity.getUserName(), userEntity.getPassword(), userEntity.getDescription(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(userEntity.getCreatedAt()), (userEntity.isStatus() ? "Active" : "Innactive"), userEntity.getAuthorityLvl()));
+        }
+
+        return userModelList;
+
+    }
+
 
 //    static {
 //        try {
@@ -52,7 +66,7 @@ public class UserService {
     }
 
     public static void logout() {
-        loggedInUser=null;
+        loggedInUser = null;
     }
 
     public boolean login(String username, String password) throws NoSuchAlgorithmException {
@@ -116,27 +130,40 @@ public class UserService {
 
     }
 
-    public boolean assignToUserList() {
-        try {
-            List<User> userEntityList = userPersistence.getAllUsers();
-
-            List<UserModel> userModelList = new LinkedList<>();
-
-            for (User userEntity : userEntityList) {
-                System.out.println(userEntity.toString() + "this is the user entity");
-                userModelList.add(new UserModel(userEntity.getId(), userEntity.getUserName(), userEntity.getPassword(), userEntity.getDescription(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(userEntity.getCreatedAt()), (userEntity.isStatus() ? "Active" : "Innactive"), userEntity.getAuthorityLvl()));
-            }
-            userList = userModelList;
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("theres an error");
-            return false;
-        }
-    }
 
     public List<UserModel> getUserList() {
         return userList;
     }
 
+    public boolean validateKey(String key) {
+        if (key.length() == 10) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public int analyseKey(String key) {
+        //THE ALGORITHM FOR ANALYSING THE USER REG KEY
+        return Integer.parseInt("" + (key.charAt(key.length() - 1)));
+    }
+
+    public String generateId() {
+        int lastIndex = 0;
+        for (UserModel user : userList) {
+            int curIndex = Integer.parseInt(user.getId().substring(1, 5));
+            if (curIndex > lastIndex) {
+                lastIndex = curIndex;
+            }
+        }
+        String lastId = "" + (++lastIndex);
+        for (int i = lastId.length(); i < 5; i++) {
+            lastId = "0" + lastId;
+        }
+        System.out.println(lastId);
+        return lastId;
+
+
+    }
 }

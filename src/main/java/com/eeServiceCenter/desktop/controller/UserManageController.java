@@ -52,7 +52,7 @@ public class UserManageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(userService.assignToUserList()){
+        if(userService.getUserList()!=null){
             System.out.println("got the users list");
         }
         else{

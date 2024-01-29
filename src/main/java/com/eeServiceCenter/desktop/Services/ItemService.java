@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class ItemService {
 
-    private static List<ItemModel> itemList = createItemList();
+    private static List<ItemModel> itemList = initializeItemList();
     ItemPersistence itemPersistent = new ItemPersistence();
 
-    private static List<ItemModel> createItemList() {
+    private static List<ItemModel> initializeItemList() {
 
         List<Item> entityList = ItemPersistence.getAll();
         List<ItemModel> tempModelList = new LinkedList<>();

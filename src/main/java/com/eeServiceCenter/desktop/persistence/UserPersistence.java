@@ -54,7 +54,7 @@ public class UserPersistence {
     public boolean save(User user){
         Session session= HibernateUtil.getSession();
         Transaction transaction=session.beginTransaction();
-
+        System.out.println(user.toString());
         session.saveOrUpdate(user);
         transaction.commit();
         session.close();
