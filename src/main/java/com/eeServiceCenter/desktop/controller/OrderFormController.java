@@ -34,14 +34,16 @@ public class OrderFormController implements Initializable {
     public JFXComboBox categoryBomboBox;
     public JFXTextField txtSearch;
     public JFXTreeTableView cartTbl;
-    public JFXMasonryPane masonryPane;
+    public FlowPane masonryPane;
 
 
     private ItemService itemService=new ItemService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         loadItems();
+
     }
 
     private void loadItems() {
@@ -59,8 +61,8 @@ public class OrderFormController implements Initializable {
 
         ImageView imageView=new ImageView();
         imageView.setImage(itemModel.getImage());
-        imageView.setFitHeight(50);
-        imageView.setFitWidth(50);
+        imageView.setFitHeight(170);
+        imageView.setFitWidth(170);
 
         Label itemCode=new Label(itemModel.getCode());
 
@@ -70,6 +72,7 @@ public class OrderFormController implements Initializable {
         vbox.getChildren().addAll(imageView,itemCode,itemName);
 
         vbox.setSpacing(10);
+
         return vbox;
 
     }
