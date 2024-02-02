@@ -59,8 +59,8 @@ public class OrderFormController implements Initializable {
 
         ImageView imageView=new ImageView();
         imageView.setImage(itemModel.getImage());
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(50);
 
         Label itemCode=new Label(itemModel.getCode());
 
