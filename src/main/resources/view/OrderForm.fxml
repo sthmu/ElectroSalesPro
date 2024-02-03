@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #3f3d3a;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eeServiceCenter.desktop.controller.OrderFormController">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1068.0" style="-fx-background-color: #3f3d3a;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eeServiceCenter.desktop.controller.OrderFormController">
     <center>
         <GridPane BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -34,6 +34,7 @@
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="55.33332824707031" minHeight="10.0" prefHeight="55.33332824707031" vgrow="SOMETIMES" />
@@ -59,11 +60,35 @@
                                 <Insets left="10.0" />
                             </GridPane.margin>
                         </JFXTextField>
+                  <Label fx:id="itemCodeLbl" text="ItemCode" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <JFXTextField fx:id="itemQtyTxt" alignment="CENTER" maxWidth="81.0" prefHeight="28.0" prefWidth="81.0" promptText="QTY" style="-fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 10;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </JFXTextField>
+                  <JFXButton fx:id="addItemBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addToCartBtnOnPress" prefHeight="34.0" prefWidth="49.0" style="-fx-background-color: #4DD54B; -fx-border-color: #5AA94C; -fx-border-radius: 10; -fx-background-radius: 10;" text="+" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Webdings" size="23.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </JFXButton>
                     </children>
                 </GridPane>
-            <ScrollPane fitToWidth="true"  style="-fx-background-color: red;" minHeight="181.0" minWidth="600.0" prefHeight="375.0" prefWidth="695.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" >
+            <ScrollPane fitToWidth="true" minHeight="181.0" minWidth="600.0" prefHeight="375.0" prefWidth="695.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                <content>
-                  <FlowPane  style="-fx-background-color: lightblue;" fx:id="masonryPane" hgap="10" vgap="10" />
+                  <FlowPane fx:id="masonryPane" hgap="10" vgap="10" />
 
                </content>
             </ScrollPane>
@@ -71,9 +96,9 @@
         </GridPane>
     </center>
     <right>
-        <GridPane prefHeight="510.0" prefWidth="300.0" style="-fx-border-color: blakc; -fx-background-color: white;" BorderPane.alignment="CENTER">
+        <GridPane minWidth="350.0" prefHeight="510.0" prefWidth="365.0" style="-fx-border-color: blakc; -fx-background-color: white;" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" prefWidth="350.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="350.0" prefWidth="350.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="174.00000508626303" minHeight="10.0" prefHeight="83.3333231608073" vgrow="SOMETIMES" />
@@ -95,8 +120,11 @@
                 </JFXButton>
             <JFXTreeTableView fx:id="cartTbl" GridPane.rowIndex="1">
                <columns>
-                  <TreeTableColumn maxWidth="150.0" minWidth="145.0" prefWidth="-1.0" text="Item name" />
-                  <TreeTableColumn maxWidth="-1.0" minWidth="150.0" prefWidth="150.0" text="Amount" />
+                  <TreeTableColumn fx:id="ItemCodeCol" maxWidth="150.0" minWidth="25.0" prefWidth="54.3333740234375" text="Code" />
+                  <TreeTableColumn fx:id="ItemDescCol" maxWidth="235.3333740234375" minWidth="33.6666259765625" prefWidth="110.6666259765625" text="Item" />
+                  <TreeTableColumn fx:id="ItemPriceCol" maxWidth="235.3333740234375" minWidth="31.66668701171875" prefWidth="66.33331298828125" text="price" />
+                  <TreeTableColumn fx:id="ItemQtyCol" maxWidth="235.3333740234375" minWidth="30.0" prefWidth="36.3333740234375" text="QTY" />
+                  <TreeTableColumn fx:id="amountCol" maxWidth="237.66668701171875" minWidth="50.0" prefWidth="97.3333740234375" text="Amount" />
                </columns>
             </JFXTreeTableView>
             <Label prefHeight="30.0" prefWidth="177.0" text="E&amp;E Service Center" GridPane.halignment="CENTER" GridPane.valignment="TOP">
@@ -126,6 +154,11 @@
                </font>
                <GridPane.margin>
                   <Insets left="80.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="totalLbl" prefHeight="17.0" prefWidth="82.0" text="{TOTAL}" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
                </GridPane.margin>
             </Label>
             </children>
