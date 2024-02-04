@@ -29,10 +29,7 @@ import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class OrderFormController implements Initializable {
 
@@ -58,6 +55,8 @@ public class OrderFormController implements Initializable {
 
     private OrderService orderService = new OrderService();
 
+    private List<ItemBox> itemBoxList=new LinkedList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ItemCodeCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("code"));
@@ -71,12 +70,18 @@ public class OrderFormController implements Initializable {
         itemQtyTxt.setVisible(false);
 
 
+        cartTbl.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            handleBillItemClick(newValue.getValue());
+        });
+
     }
 
     private void loadItems() {
         List<ItemModel> itemModelList = ItemService.getItemList();
         for (ItemModel itemModel : itemModelList) {
-            masonryPane.getChildren().add(createItem(itemModel));
+            ItemBox itemBox=createItem(itemModel);
+            masonryPane.getChildren().add(itemBox);
+            itemBoxList.add(itemBox);
         }
     }
 
@@ -104,7 +109,7 @@ public class OrderFormController implements Initializable {
 
         addPressAndHoldHandler(itemBox, Duration.seconds(1),
                 event -> {
-                    orderService.addToCart(itemModel, orderService.getQtyInCart(itemModel));
+                    orderService.addToCart(itemModel, orderService.getQtyInCart(itemModel)+1);
                     cartUpdate();
                 });
 
@@ -134,12 +139,27 @@ public class OrderFormController implements Initializable {
     }
 
     private void handleItemClick(ItemBox itemClicked) {
+        selectAnItem(itemClicked);
+    }
+
+    void handleBillItemClick(BillItemTm billItem){
+        for(ItemBox itemBox:itemBoxList){
+            if( billItem.getCode().equalsIgnoreCase(itemBox.getItem().getCode())){
+                selectAnItem(itemBox);
+                return;
+            }
+        }
+
+    }
+
+
+//SET ITEMBOX BACKGROUND COLOR
+    void selectAnItem(ItemBox itemClicked){
         if (itemSelected != null) {
             itemSelected.setStyle("-fx-background-color: white;");
 
         }
         itemClicked.setStyle("-fx-background-color: gray;");
-        System.out.println(itemClicked.getItem());
         itemSelected = itemClicked;
 
         itemCodeLbl.setVisible(true);
@@ -148,7 +168,6 @@ public class OrderFormController implements Initializable {
         Integer qty = orderService.getQtyInCart(itemClicked.getItem());
         itemQtyTxt.setText(String.valueOf(qty));
         addItemBtn.setVisible(true);
-
     }
 
 
@@ -161,7 +180,6 @@ public class OrderFormController implements Initializable {
             Map.Entry<ItemModel, Integer> entry = iterator.next();
             ItemModel itemModel = entry.getKey();
             int quantity = entry.getValue();
-            System.out.println("Item: " + itemModel.getCode() + ", Quantity: " + quantity);
             tmList.add(new BillItemTm(itemModel, quantity));
 
         }
