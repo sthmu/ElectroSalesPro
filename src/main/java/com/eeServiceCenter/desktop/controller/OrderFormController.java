@@ -71,7 +71,9 @@ public class OrderFormController implements Initializable {
 
 
         cartTbl.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            handleBillItemClick(newValue.getValue());
+            if(newValue!=null) {
+                handleBillItemClick(newValue.getValue());
+            }
         });
 
     }
@@ -79,13 +81,13 @@ public class OrderFormController implements Initializable {
     private void loadItems() {
         List<ItemModel> itemModelList = ItemService.getItemList();
         for (ItemModel itemModel : itemModelList) {
-            ItemBox itemBox=createItem(itemModel);
+            ItemBox itemBox=createItemBox(itemModel);
             masonryPane.getChildren().add(itemBox);
             itemBoxList.add(itemBox);
         }
     }
 
-    private ItemBox createItem(ItemModel itemModel) {
+    private ItemBox createItemBox(ItemModel itemModel) {
         ItemBox itemBox = new ItemBox(itemModel);
 
         ImageView imageView = new ImageView();
@@ -173,7 +175,7 @@ public class OrderFormController implements Initializable {
 
     void cartUpdate() {
         ObservableList<BillItemTm> tmList = FXCollections.observableArrayList();
-
+        double total=0d;
 
         Iterator<Map.Entry<ItemModel, Integer>> iterator = orderService.getCart().entrySet().iterator();
         while (iterator.hasNext()) {
@@ -181,14 +183,18 @@ public class OrderFormController implements Initializable {
             ItemModel itemModel = entry.getKey();
             int quantity = entry.getValue();
             tmList.add(new BillItemTm(itemModel, quantity));
-
+            total+=quantity*itemModel.getUnitPrice();
         }
         RecursiveTreeItem<BillItemTm> treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
-
+        if(cartTbl.getSelectionModel()!=null) {
+            cartTbl.getSelectionModel().clearSelection();
+        }
         cartTbl.setRoot(treeItem);
         cartTbl.setShowRoot(false);
-
+        totalLbl.setText(String.valueOf(total));
     }
+
+
 
     public void bckBtnOnAction() throws IOException {
         Stage stage = (Stage) pane.getScene().getWindow();
